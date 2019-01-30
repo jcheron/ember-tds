@@ -4,13 +4,16 @@ import EmberObject, { computed } from '@ember/object';
 const Note=EmberObject.extend({
   content: 'Aucun',
   MAX: 100,
+  info: null,
   size: computed('content',function(){
+    this.set('info',null);
     return this.MAX-this.content.length;
   }),
   style: computed('size',function(){
-    if(this.size<20){
+    let size=this.get('size');
+    if(size<20){
       return 'danger';
-    }else if(this.size<50){
+    }else if(size<50){
       return 'warning';
     }
     return 'info';
